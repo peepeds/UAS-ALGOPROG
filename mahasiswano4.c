@@ -4,7 +4,7 @@ struct mahasiswa{
     char nama [255] , JK;
     int usia , waktu ; 
 
-}mhs[10] ;
+}mhs[11] ;
 
 void nulis() ; void baca();int menu();
 int main(){
@@ -24,10 +24,11 @@ void nulis(){
     if(dummy > 1000){
         dummy%= 1000 ;
     }
+    printf("%003ld\n",dummy);
     
     sprintf(namaFile, "psikotest%003ld.dat", dummy);
     fp = fopen(namaFile,"a+");
-    while(i<10){
+    while(i<11){
         x = i + 1;
         y = x;
         struct  mahasiswa x ;
@@ -101,7 +102,7 @@ void baca(){
     int i = 0 , x, y;
    
 
-    while(i<10){
+    while(i<11){
         x = i + 1;
         struct  mahasiswa x ;
         fread(&mhs[i],sizeof(struct mahasiswa),1,fp);
