@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <string.h>
 
 struct mahasiswa{
     char nama [255] , JK;
     int usia , waktu ; 
 
-}mhs[11] ;
+}mhs[12] ;
 
 void nulis() ; void baca();int menu();
 int main(){
@@ -15,8 +16,7 @@ void nulis(){
     FILE *fp ;
    
     int i = 0;
-    int x;
-    int y;
+    int x, y , X , Y , len;
     const long int NIM = 2602063043; //  NIM saya adalah 2602063043 
     long int dummy = NIM ; 
     char namaFile[260];
@@ -28,16 +28,42 @@ void nulis(){
     
     sprintf(namaFile, "psikotest%003ld.dat", dummy);
     fp = fopen(namaFile,"a+");
-    while(i<11){
+
+    while(i<12){
         x = i + 1;
         y = x;
         struct  mahasiswa x ;
         if(i>0){
             printf("Tekan ENTER untuk melanjutkan program.\n");
         }
-        //getchar();
+        getchar();
         printf("Masukkan Nama : ");
         scanf("%[^\n]",mhs[i].nama);
+        len = strlen(mhs[i].nama); 
+
+        for(X=0 ; X < len ; X++){
+            if(mhs[i].nama[X]>=97 &&mhs[i].nama[X]<=122){
+                mhs[i].nama[X] -= 32 ;
+            }
+        }
+        for(Y=0 ; Y< len ; Y++){
+            if(Y==0){
+                if(mhs[i].nama[Y]>= 97 && mhs[i].nama[Y]<= 122){
+                    mhs[i].nama[Y] -= 32 ;
+                }
+            } else if(mhs[i].nama[Y]==32){  
+                if(mhs[i].nama[Y+1]>=97 && mhs[i].nama[Y+1]<=122){
+                    mhs[i].nama[Y] -= 32 ;
+                    Y++;
+                } 
+                Y++;
+                
+            }else { 
+                if(mhs[i].nama[Y]>=65 && mhs[i].nama[Y] <= 90){
+                    mhs[i].nama[Y] += 32 ;
+                }
+            }
+        }
        
         getchar();
      
@@ -102,7 +128,7 @@ void baca(){
     int i = 0 , x, y;
    
 
-    while(i<11){
+    while(i<12){
         x = i + 1;
         struct  mahasiswa x ;
         fread(&mhs[i],sizeof(struct mahasiswa),1,fp);
