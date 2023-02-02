@@ -25,7 +25,7 @@
 struct mahasiswa{
     char nama [255] , JK;
     int usia , waktu ; 
-}mhs[11] ;
+}mhs[12] ;
 
 
 void menu(); void search(); void baca();
@@ -37,7 +37,7 @@ void baca(){
     fp = fopen("psikotest043.dat","r");
     int i = 0-1 , x, y;
    
-    while(i++<11-1){
+    while(i++<12-1){
         x = i + 1;
         struct  mahasiswa x ;
         fread(&mhs[i],sizeof(struct mahasiswa),1,fp);
@@ -120,24 +120,41 @@ void menu(){
 void search(){
 
     int i=0 -1 , nilai=0; 
-    int  x , len , j;
+    int  x , len , j , spasi=0 ;
     char dicari[255];
     
     getchar();
     printf("Masukkan nama yang ingin dicari: ");
     scanf("%[^\n]",dicari); getchar();
     len = strlen(dicari); 
-
+    
     for(j=1 ; j < len ; j++){
         if(dicari[j]>= 65 && dicari[j]<= 90){
             dicari[j] += 32 ;
+        } else if(dicari[j]==32){
+          
+            spasi = j ;
+            if(dicari[j+1]>= 65 && dicari[j+1]<= 90){
+                dicari[j+1] += 32 ;
+             
+            } else if (dicari[j+1] >=97 && dicari[j+1]<= 122){
+                dicari[j+1] -= 32 ;
+               
+            }
+            j++;
         }
     }
     if(dicari[0] >=97 && dicari[0]<= 122){
         dicari[0] -= 32 ;
+    }else if(spasi !=0){
+        if(dicari[spasi+1]>=97 && dicari[spasi+1]<=122){
+            dicari[spasi+1] -= 32 ;
+        }
     }
+    
 
-    while(i++<11-1){
+    printf("%s\n",dicari);
+    while(i++<12-1){
         x = i + 1;
         
         struct  mahasiswa x ;
@@ -181,8 +198,8 @@ int sortnama(){
 
     char stmp [255] ;
     
-    for(i=0 ; i < 11-1; i++){
-        for(j= i+1 ;j< 11 ; j++){
+    for(i=0 ; i < 12-1; i++){
+        for(j= i+1 ;j< 12 ; j++){
             if(strcmp(mhs[i].nama,mhs[j].nama)>0){
                 tmp = mhs[i] ; 
                 mhs[i] = mhs[j];
@@ -202,7 +219,7 @@ int sortnama(){
     printf(G"Berhasil di sorting\n"R);
     set(1);
     i=0-1;
-    while(i++<11-1){
+    while(i++<12-1){
 
         printf(Y"\n");
         puts("------------------------------------");
@@ -226,8 +243,8 @@ int sortusia(){
 
     char stmp [255] ;
     
-    for(i=0 ; i < 11-1; i++){
-        for(j= i+1 ;j< 11 ; j++){
+    for(i=0 ; i < 12-1; i++){
+        for(j= i+1 ;j< 12 ; j++){
             if(mhs[i].usia>mhs[j].usia){
                 tmp = mhs[i] ; 
                 mhs[i] = mhs[j];
@@ -248,7 +265,7 @@ int sortusia(){
     printf(G"Berhasil di sorting\n"R);
     set(1);
     
-    while(i++<11-1){
+    while(i++<12-1){
 
         printf(S"\n");
         puts("------------------------------------");
