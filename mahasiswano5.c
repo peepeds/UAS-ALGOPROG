@@ -13,7 +13,8 @@
 #define R "\x1b[0m" // Reset
 #define S "\x1b[2m" // Faint 
 
-
+// targeting OS , hal ini disebabkan karena OS saya adalah MAC OS 
+// untuk mencegah error karena perbedaan OS maka saya melakukan targeting OS 
 #ifdef _WIN32
     #define CLS system("cls")
 #else
@@ -24,7 +25,7 @@
 struct mahasiswa{
     char nama [255] , JK;
     int usia , waktu ; 
-}mhs[10] ;
+}mhs[11] ;
 
 
 void menu(); void search(); void baca();
@@ -36,7 +37,7 @@ void baca(){
     fp = fopen("psikotest043.dat","r");
     int i = 0-1 , x, y;
    
-    while(i++<10-1){
+    while(i++<11-1){
         x = i + 1;
         struct  mahasiswa x ;
         fread(&mhs[i],sizeof(struct mahasiswa),1,fp);
@@ -90,7 +91,7 @@ void menu(){
     printf("|               Menu               |\n");
     puts("+----------------------------------+");
     printf("|1. Search Nama                    |\n");
-    printf("|2. Sorting by Name                |\n");
+    printf("|2. Sorting by Name                |\n"); 
     printf("|3. Sorting by Age                 |\n");
     printf("|4. Exit                           |\n");
     printf(W"+----------------------------------+\n\n");
@@ -136,7 +137,7 @@ void search(){
         dicari[0] -= 32 ;
     }
 
-    while(i++<10-1){
+    while(i++<11-1){
         x = i + 1;
         
         struct  mahasiswa x ;
@@ -180,12 +181,18 @@ int sortnama(){
 
     char stmp [255] ;
     
-    for(i=0 ; i < 10-1; i++){
-        for(j= i+1 ;j< 10 ; j++){
+    for(i=0 ; i < 11-1; i++){
+        for(j= i+1 ;j< 11 ; j++){
             if(strcmp(mhs[i].nama,mhs[j].nama)>0){
                 tmp = mhs[i] ; 
                 mhs[i] = mhs[j];
                 mhs[j] = tmp ;
+            } else if(strcmp(mhs[i].nama,mhs[j].nama)==0){
+                if(mhs[i].usia>mhs[j].usia){
+                    tmp = mhs[i] ; 
+                    mhs[i] = mhs[j];
+                    mhs[j] = tmp ;
+                }
             }
         }
     }
@@ -195,7 +202,7 @@ int sortnama(){
     printf(G"Berhasil di sorting\n"R);
     set(1);
     i=0-1;
-    while(i++<10-1){
+    while(i++<11-1){
 
         printf(Y"\n");
         puts("------------------------------------");
@@ -219,12 +226,18 @@ int sortusia(){
 
     char stmp [255] ;
     
-    for(i=0 ; i < 10-1; i++){
-        for(j= i+1 ;j< 10 ; j++){
+    for(i=0 ; i < 11-1; i++){
+        for(j= i+1 ;j< 11 ; j++){
             if(mhs[i].usia>mhs[j].usia){
                 tmp = mhs[i] ; 
                 mhs[i] = mhs[j];
                 mhs[j] = tmp ;
+            } else if(mhs[i].usia == mhs[j].usia){
+                if(strcmp(mhs[i].nama,mhs[j].nama)>0){
+                    tmp = mhs[i] ; 
+                    mhs[i] = mhs[j];
+                    mhs[j] = tmp ;
+                }
             }
         }
     }
@@ -235,7 +248,7 @@ int sortusia(){
     printf(G"Berhasil di sorting\n"R);
     set(1);
     
-    while(i++<10-1){
+    while(i++<11-1){
 
         printf(S"\n");
         puts("------------------------------------");
