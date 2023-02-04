@@ -246,8 +246,8 @@ int sortusia(){
 
     char stmp [255] ;
     
-    for(i=0 ; i < 12-1; i++){
-        for(j= i+1 ;j< 12 ; j++){
+    for(i=0 ; i < 20-1; i++){
+        for(j= i+1 ;j< 20 ; j++){
             if(mhs[i].usia>mhs[j].usia){
                 tmp = mhs[i] ; 
                 mhs[i] = mhs[j];
