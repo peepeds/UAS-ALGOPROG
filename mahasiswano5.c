@@ -25,7 +25,7 @@
 struct mahasiswa{
     char nama [255] , JK;
     int usia , waktu ; 
-}mhs[12] ;
+}mhs[20] ;
 
 
 void menu(); void search(); void baca();
@@ -37,7 +37,8 @@ void baca(){
     fp = fopen("psikotest043.dat","r");
     int i = 0-1 , x, y;
    
-    while(i++<12-1){
+    while(!feof(fp)){
+        i++;
         x = i + 1;
         struct  mahasiswa x ;
         fread(&mhs[i],sizeof(struct mahasiswa),1,fp);
@@ -153,8 +154,8 @@ void search(){
     }
     
 
-    printf("%s\n",dicari);
-    while(i++<12-1){
+   
+    while(i++<20-1){
         x = i + 1;
         
         struct  mahasiswa x ;
@@ -198,8 +199,8 @@ int sortnama(){
 
     char stmp [255] ;
     
-    for(i=0 ; i < 12-1; i++){
-        for(j= i+1 ;j< 12 ; j++){
+    for(i=0 ; i < 20-1; i++){
+        for(j= i+1 ;j< 20 ; j++){
             if(strcmp(mhs[i].nama,mhs[j].nama)>0){
                 tmp = mhs[i] ; 
                 mhs[i] = mhs[j];
@@ -219,8 +220,10 @@ int sortnama(){
     printf(G"Berhasil di sorting\n"R);
     set(1);
     i=0-1;
-    while(i++<12-1){
-
+    while(i++<20-1){
+        if(mhs[i].usia==0){
+            continue;
+        }
         printf(Y"\n");
         puts("------------------------------------");
         printf("Nama          :%s \n",mhs[i].nama);
@@ -265,8 +268,11 @@ int sortusia(){
     printf(G"Berhasil di sorting\n"R);
     set(1);
     
-    while(i++<12-1){
-
+    while(i++<20-1){
+        if(mhs[i].usia==0){
+            continue;
+        }
+       
         printf(S"\n");
         puts("------------------------------------");
         printf("Nama          :%s \n",mhs[i].nama);
