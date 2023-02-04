@@ -1,15 +1,18 @@
 #include<stdio.h>
 
 int main(){
-    int i, j, n;
-    printf("Masukkan baris segitiga: ");
-    scanf("%d",&n);
-    for(i = 1; i <= n; i++){
-        for(j = 1; j <= i; j++){
-        printf("* ");
-        }
-
-    printf("\n");
+    long long unsigned int i,  n , tot , dummy;
+    printf("Ingin Mencari nilai faktorial berapa ? \n>> ");
+    scanf("%lld",&n);
+    
+    dummy = n;
+    if(n == 0){
+        n = 1 ;
     }
+    tot = n;
+    while(n--!=1){
+        tot*= n ;
+    }
+    printf("Nilai faktorial dari %lld adalah: %lld\n",dummy,tot);
   
 }
